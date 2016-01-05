@@ -434,7 +434,10 @@ peekChar' = do
 -- | Match either a single newline character @\'\\n\'@, or a carriage
 -- return followed by a newline character @\"\\r\\n\"@.
 endOfLine :: Parser ()
-endOfLine = (char '\n' >> return ()) <|> (string "\r\n" >> return ())
+endOfLine =
+  (string "\r\n" >> return ())
+  <|> (char '\n' >> return ())
+  <|> (char '\r' >> return ())
 
 -- | Terminal failure continuation.
 failK :: Failure a
